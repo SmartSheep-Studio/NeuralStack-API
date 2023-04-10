@@ -12,7 +12,7 @@ require (
 	golang.org/x/exp v0.0.0-20230321023759-10a507213a29
 	gorm.io/datatypes v1.1.1
 	gorm.io/driver/postgres v1.4.5
-	gorm.io/gorm v1.24.6
+	gorm.io/gorm v1.24.7-0.20230306060331-85eaf9eeda11
 )
 
 require (
