@@ -18,7 +18,7 @@ type OneTimePasscode struct {
 	Passcode    string     `json:"passcode" gorm:"uniqueIndex"`
 	RefreshedAt *time.Time `json:"refreshed_at"`
 	ExpiredAt   *time.Time `json:"expired_at"`
-	UserID      uint       `json:"user"`
+	UserID      uint       `json:"user_id"`
 }
 
 type UserPersonalToken struct {
@@ -28,5 +28,5 @@ type UserPersonalToken struct {
 	Description string     `json:"description"`
 	ExpiredAt   *time.Time `json:"expired_at"`
 	TokenID     string     `json:"token"`
-	UserID      uint       `json:"user"`
+	UserID      uint       `json:"user_id"`
 }

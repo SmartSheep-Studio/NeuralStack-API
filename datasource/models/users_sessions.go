@@ -23,9 +23,9 @@ type UserSession struct {
 	Refresh    string     `json:"refresh" gorm:"type:varchar(512)"`
 	Scope      string     `json:"scope" gorm:"type:varchar(512)"`
 	ExpiredAt  *time.Time `json:"expired_at"`
-	IdentityID *uint      `json:"identity"`
-	ClientID   *uint      `json:"client"`
-	UserID     uint       `json:"user"`
+	IdentityID *uint      `json:"identity_id"`
+	ClientID   *uint      `json:"client_id"`
+	UserID     uint       `json:"user_id"`
 }
 
 const (

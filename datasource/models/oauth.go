@@ -19,7 +19,7 @@ type OauthClient struct {
 	IsDeveloping         bool            `json:"is_developing"`
 	IsIdentitiesReadable bool            `json:"is_identities_readable"`
 	IsIdentitiesEditable bool            `json:"is_identities_editable"`
-	ProjectID            uint            `json:"project"`
+	ProjectID            uint            `json:"project_id"`
 }
 
 type OauthIdentity struct {
@@ -29,6 +29,6 @@ type OauthIdentity struct {
 	Data        datatypes.JSON `json:"data"`
 	Permissions datatypes.JSON `json:"permissions"`
 	Sessions    []UserSession  `json:"sessions" gorm:"foreignKey:IdentityID"`
-	UserID      uint           `json:"user"`
-	ClientID    uint           `json:"client"`
+	UserID      uint           `json:"user_id"`
+	ClientID    uint           `json:"client_id"`
 }

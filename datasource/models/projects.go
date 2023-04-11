@@ -8,8 +8,8 @@ import (
 
 type ProjectDeveloper struct {
 	IsOwner   bool           `json:"is_owned"`
-	UserID    uint           `json:"user" gorm:"primaryKey"`
-	ProjectID uint           `json:"project" gorm:"primaryKey"`
+	UserID    uint           `json:"user_id" gorm:"primaryKey"`
+	ProjectID uint           `json:"project_id" gorm:"primaryKey"`
 	CreatedAt time.Time      `json:"created_at"`
 	UpdatedAt time.Time      `json:"updated_at"`
 	DeletedAt gorm.DeletedAt `json:"deleted_at" gorm:"index"`

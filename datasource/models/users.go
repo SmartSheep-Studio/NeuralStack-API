@@ -20,7 +20,7 @@ type User struct {
 	Passcodes   []OneTimePasscode   `json:"passcodes"`
 	Sessions    []UserSession       `json:"sessions"`
 	Tokens      []UserPersonalToken `json:"tokens"`
-	GroupID     *uint               `json:"groups"`
+	GroupID     *uint               `json:"group_id"`
 	Permissions datatypes.JSON      `json:"permissions"`
 	LockedAt    *time.Time          `json:"locked_at"`
 }

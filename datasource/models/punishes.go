@@ -15,5 +15,5 @@ type Punish struct {
 	Level      int        `json:"level"`
 	EffectedAt *time.Time `json:"effected_at"`
 	ExpiredAt  *time.Time `json:"expired_at"`
-	UserID     uint       `json:"user"`
+	UserID     uint       `json:"user_id"`
 }
