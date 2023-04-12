@@ -8,21 +8,21 @@ import (
 type User struct {
 	Model
 
-	AvatarID    string              `json:"avatar"`
-	Username    string              `json:"username" gorm:"uniqueIndex"`
-	Nickname    string              `json:"nickname"`
-	Password    string              `json:"-"`
-	Description string              `json:"description"`
-	Details     UserDetails         `json:"details" gorm:"embedded;embeddedPrefix:details_"`
-	Friends     []*User             `json:"friends" gorm:"many2many:user_friends"`
-	Projects    []Project           `json:"projects" gorm:"many2many:project_developers"`
-	Punishes    []Punish            `json:"punishes"`
-	Passcodes   []OneTimePasscode   `json:"passcodes"`
-	Sessions    []UserSession       `json:"sessions"`
-	Tokens      []UserPersonalToken `json:"tokens"`
-	GroupID     *uint               `json:"group_id"`
-	Permissions datatypes.JSON      `json:"permissions"`
-	LockedAt    *time.Time          `json:"locked_at"`
+	AvatarID     string              `json:"avatar"`
+	Username     string              `json:"username" gorm:"uniqueIndex"`
+	Nickname     string              `json:"nickname"`
+	Password     string              `json:"-"`
+	Descriptions string              `json:"descriptions"`
+	Details      UserDetails         `json:"details" gorm:"embedded;embeddedPrefix:details_"`
+	Friends      []*User             `json:"friends" gorm:"many2many:user_friends"`
+	Projects     []Project           `json:"projects" gorm:"many2many:project_developers"`
+	Punishes     []Punish            `json:"punishes"`
+	Passcodes    []OneTimePasscode   `json:"passcodes"`
+	Sessions     []UserSession       `json:"sessions"`
+	Tokens       []UserPersonalToken `json:"tokens"`
+	GroupID      *uint               `json:"group_id"`
+	Permissions  datatypes.JSON      `json:"permissions"`
+	LockedAt     *time.Time          `json:"locked_at"`
 }
 
 type UserDetails struct {
@@ -39,8 +39,8 @@ type UserDetails struct {
 type UserGroup struct {
 	Model
 
-	Name        string         `json:"name"`
-	Description string         `json:"description"`
-	Users       []User         `json:"users" gorm:"foreignKey:GroupID"`
-	Permissions datatypes.JSON `json:"permissions"`
+	Name         string         `json:"name"`
+	Descriptions string         `json:"descriptions"`
+	Users        []User         `json:"users" gorm:"foreignKey:GroupID"`
+	Permissions  datatypes.JSON `json:"permissions"`
 }

@@ -20,7 +20,7 @@ type Project struct {
 
 	Name          string             `json:"name"`
 	Url           string             `json:"url"`
-	Description   string             `json:"description"`
+	Descriptions  string             `json:"descriptions"`
 	Configuration datatypes.JSON     `json:"configuration"`
 	Developers    []ProjectDeveloper `json:"developers"`
 	OauthClients  []OauthClient      `json:"oauth_clients"`

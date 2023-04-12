@@ -24,9 +24,9 @@ type OneTimePasscode struct {
 type UserPersonalToken struct {
 	Model
 
-	Name        string     `json:"name"`
-	Description string     `json:"description"`
-	ExpiredAt   *time.Time `json:"expired_at"`
-	TokenID     string     `json:"token"`
-	UserID      uint       `json:"user_id"`
+	Name         string     `json:"name"`
+	Descriptions string     `json:"descriptions"`
+	ExpiredAt    *time.Time `json:"expired_at"`
+	TokenID      string     `json:"token"`
+	UserID       uint       `json:"user_id"`
 }
