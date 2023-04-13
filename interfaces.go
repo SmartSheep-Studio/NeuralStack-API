@@ -32,6 +32,7 @@ type PluginAssets struct {
 
 type WebApp struct {
 	RootElement        string           `json:"el"`
+	InjectApp          string           `json:"inject"`
 	DisplayOnDesktop   bool             `json:"shortcut"`
 	DisplayOnLaunchpad bool             `json:"display"`
 	ID                 string           `json:"id"`
