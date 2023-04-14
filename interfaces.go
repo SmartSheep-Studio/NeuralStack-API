@@ -3,6 +3,7 @@ package plugins
 import (
 	"github.com/gin-gonic/gin"
 	"gorm.io/gorm"
+	"repo.smartsheep.studio/smartsheep/neuralstack-api/utils"
 )
 
 // Plugin to description the plugin information and what to do and need what
@@ -31,21 +32,20 @@ type PluginAssets struct {
 }
 
 type WebApp struct {
-	RootElement        string           `json:"el"`
-	InjectApp          string           `json:"inject"`
-	DisplayOnDesktop   bool             `json:"shortcut"`
-	DisplayOnLaunchpad bool             `json:"display"`
-	ID                 string           `json:"id"`
-	Icon               string           `json:"icon"`
-	Name               string           `json:"name"`
-	Descriptions       string           `json:"descriptions"`
-	WindowOptions      WebWindowOptions `json:"window"`
-	Uri                string           `json:"uri"`
-	Authorized         bool             `json:"authorized"`
-	Perms              []string         `json:"permissions"`
-	Script             string           `json:"-"`
-	Style              string           `json:"-"`
-	PackageID          string           `json:"pkg"`
+	RootFile           string                `json:"index"`
+	InjectApp          string                `json:"inject"`
+	DisplayOnDesktop   bool                  `json:"shortcut"`
+	DisplayOnLaunchpad bool                  `json:"display"`
+	ID                 string                `json:"id"`
+	Icon               string                `json:"icon"`
+	Name               string                `json:"name"`
+	Descriptions       string                `json:"descriptions"`
+	WindowOptions      WebWindowOptions      `json:"window"`
+	Uri                string                `json:"uri"`
+	Authorized         bool                  `json:"authorized"`
+	Perms              []string              `json:"permissions"`
+	Assets             utils.EmbedFileSystem `json:"-"`
+	PackageID          string                `json:"pkg"`
 }
 
 type WebWindowOptions struct {
