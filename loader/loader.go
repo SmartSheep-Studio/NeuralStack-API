@@ -21,7 +21,7 @@ func LoadPlugin(dst string, router *gin.Engine) error {
 
 	// Lookup instance
 	var instance *plugins.Plugin
-	if lookup, err := plug.Lookup("Manifest"); err != nil {
+	if lookup, err := plug.Lookup("P"); err != nil {
 		return fmt.Errorf("error when loading plugin %s: missing instance %w", dst, err)
 	} else {
 		instance = lookup.(*plugins.Plugin)
