@@ -35,9 +35,9 @@ func SaveConfig() error {
 }
 
 func AllConfig(p api.Plugin) any {
-	return viper.Get(p.PackageID)
+	return viper.Get(p.Manifest.Package)
 }
 
 func GetConfig[T any](p api.Plugin, key string) T {
-	return viper.Get(fmt.Sprintf("plugins.%s.%s", p.PackageID, key)).(T)
+	return viper.Get(fmt.Sprintf("plugins.%s.%s", p.Manifest.Package, key)).(T)
 }
