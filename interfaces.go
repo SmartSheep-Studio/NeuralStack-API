@@ -17,6 +17,7 @@ type Plugin struct {
 	Assets *PluginAssets `json:"assets"`
 
 	// Plugin Hooks
+	Init    func(p *Plugin)                     `json:"-"`
 	Setup   func(p *Plugin, router gin.IRouter) `json:"-"`
 	Migrate func(datasource *gorm.DB)           `json:"-"`
 }

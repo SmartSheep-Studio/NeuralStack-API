@@ -27,6 +27,11 @@ func LoadPlugin(dst string, router *gin.Engine) error {
 		instance = lookup.(*plugins.Plugin)
 	}
 
+	// Run init function
+	if instance.Init != nil {
+		instance.Init(instance)
+	}
+
 	// Run migrate function
 	if instance.Migrate != nil {
 		instance.Migrate(datasource.C)
