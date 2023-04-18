@@ -19,13 +19,13 @@ func RenderLaunchpad(user *models.User) []map[string]any {
 			m["id"] = app.ID
 			m["icon"] = app.Icon
 			m["name"] = app.Name
-			m["descriptions"] = app.Descriptions
+			m["description"] = app.Description
 		}
 
-		if len(app.Descriptions) == 0 {
-			m["descriptions"] = nil
+		if len(app.Description) == 0 {
+			m["description"] = nil
 		} else {
-			m["descriptions"] = app.Descriptions
+			m["description"] = app.Description
 		}
 
 		rendered = append(rendered, m)

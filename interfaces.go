@@ -39,7 +39,7 @@ type WebApp struct {
 	ID                 string                 `json:"id"`
 	Icon               string                 `json:"icon"`
 	Name               string                 `json:"name"`
-	Descriptions       string                 `json:"descriptions"`
+	Description        string                 `json:"description"`
 	WindowOptions      WebWindowOptions       `json:"window"`
 	Uri                string                 `json:"uri"`
 	Authorized         bool                   `json:"authorized"`

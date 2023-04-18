@@ -8,7 +8,7 @@ type OauthClient struct {
 	Model
 
 	Name                 string          `json:"name"`
-	Descriptions         string          `json:"descriptions"`
+	Description          string          `json:"description"`
 	Secret               string          `json:"secret" gorm:"type:varchar(512)"`
 	Domain               string          `json:"domain" gorm:"type:varchar(512)"`
 	Sessions             []UserSession   `json:"sessions" gorm:"foreignKey:ClientID"`
