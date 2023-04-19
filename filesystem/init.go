@@ -26,6 +26,10 @@ func init() {
 	}
 }
 
+func GetPlugins() string {
+	return filepath.Join(filepath.Dir(root), "plugins")
+}
+
 func GetBuckets() string {
 	return filepath.Join(root, "buckets")
 }
