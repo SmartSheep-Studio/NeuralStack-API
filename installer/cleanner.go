@@ -1,7 +1,6 @@
 package installer
 
 import (
-	"io/fs"
 	"os"
 	"path/filepath"
 	"strings"
@@ -10,15 +9,16 @@ import (
 )
 
 func CleanupFolder(source string) {
-	filepath.Walk(source, func(path string, info fs.FileInfo, err error) error {
-		if err != nil {
-			log.Fatalf("Error when cleanning up installer cache: %w\n", err)
-		} else if !info.IsDir() || (!strings.HasSuffix(info.Name(), ".installer-cache") && !strings.HasSuffix(info.Name(), ".plug.zip")) {
-			return nil // Skip this folder if it isn't a installer cache or a install pack
-		} else {
-			os.RemoveAll(path)
-		}
+	entries, err := os.ReadDir(source)
+	if err != nil {
+		log.Fatalf("Error when cleanning up installer cache: %w", err)
+	}
 
-		return nil
-	})
+	for _, info := range entries {
+		if strings.HasSuffix(info.Name(), ".installer-cache") && info.IsDir() {
+			os.RemoveAll(filepath.Join(source, info.Name()))
+		} else if strings.HasSuffix(info.Name(), ".plug.zip") {
+			os.Remove(filepath.Join(source, info.Name()))
+		}
+	}
 }

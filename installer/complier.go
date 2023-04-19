@@ -3,7 +3,13 @@ package installer
 import (
 	"fmt"
 	"os/exec"
+	"path/filepath"
 	"runtime"
+	"strings"
+
+	"github.com/charmbracelet/log"
+	api "repo.smartsheep.studio/smartsheep/neuralstack-api"
+	"repo.smartsheep.studio/smartsheep/neuralstack-api/filesystem"
 )
 
 func CheckEnvironment() error {
@@ -20,14 +26,20 @@ func CheckEnvironment() error {
 	return nil
 }
 
-func CompliePlugin(source string, scripts []string) error {
-	for _, script := range scripts {
-		cmd := exec.Command(script)
-		cmd.Dir = source
-		if err := cmd.Run(); err != nil {
+func CompliePlugin(manifest api.PluginManifest, source string) error {
+	log.Infof("Starting complie plugin %s v%s", manifest.Name, manifest.Version)
+	for _, script := range manifest.Installer.Scripts {
+		slice := strings.Split(script, " ")
+		cmd := exec.Command(slice[0], slice[1:]...)
+		cmd.Dir = filepath.Join(filesystem.GetAbsRoot(), source)
+		if output, err := cmd.Output(); err != nil {
+			log.Errorf(string(output))
 			return err
+		} else {
+			log.Infof(string(output))
 		}
 	}
+	log.Infof("Success complie plugin %s v%s", manifest.Name, manifest.Version)
 
 	return nil
 }

@@ -1,7 +1,6 @@
 package installer
 
 import (
-	"path/filepath"
 	"time"
 
 	"github.com/charmbracelet/log"
@@ -22,7 +21,7 @@ func AutomaticSetup() {
 		log.Fatalf("Error when scanning plugins: %w", err)
 	} else {
 		for _, pack := range packs {
-			if err := InstallPlugin(filepath.Join(filesystem.GetPlugins(), pack), filesystem.GetPlugins()); err != nil {
+			if err := InstallPlugin(pack, filesystem.GetPlugins()); err != nil {
 				log.Fatalf("Error when install plugin %s: %w\n", pack, err)
 			}
 		}

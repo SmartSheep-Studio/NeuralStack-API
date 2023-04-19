@@ -15,7 +15,7 @@ func InstallPlugin(source string, dst string) error {
 	if err != nil {
 		return err
 	} else {
-		if err := CompliePlugin(workspace, manifest.Installer.Scripts); err != nil {
+		if err := CompliePlugin(manifest, workspace); err != nil {
 			return err
 		}
 	}
@@ -23,7 +23,7 @@ func InstallPlugin(source string, dst string) error {
 	if stat, err := os.Stat(filepath.Join(workspace, manifest.Installer.Output)); stat.IsDir() || err != nil {
 		return fmt.Errorf("complie failed, output doesn't exists: %s", err)
 	} else {
-		if err := os.Rename(filepath.Join(source, manifest.Installer.Output), filepath.Join(dst, manifest.Installer.Output)); err != nil {
+		if err := os.Rename(filepath.Join(workspace, manifest.Installer.Output), filepath.Join(dst, manifest.Installer.Output)); err != nil {
 			return err
 		}
 	}

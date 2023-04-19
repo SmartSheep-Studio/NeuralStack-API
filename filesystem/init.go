@@ -26,8 +26,13 @@ func init() {
 	}
 }
 
+func GetAbsRoot() string {
+	p, _ := os.Executable()
+	return filepath.Dir(p)
+}
+
 func GetPlugins() string {
-	return filepath.Join(filepath.Dir(root), "plugins")
+	return "plugins"
 }
 
 func GetBuckets() string {

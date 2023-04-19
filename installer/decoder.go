@@ -18,7 +18,7 @@ func randomID(length int) string {
 }
 
 func DecodeInstallPack(source string, dst string) (string, api.PluginManifest, error) {
-	workspace := filepath.Join(dst, fmt.Sprintf(randomID(18), ".installer-cache"))
+	workspace := filepath.Join(dst, fmt.Sprintf("%s%s", randomID(18), ".installer-cache"))
 
 	// Extract zip into temporary folder
 	extractZip(source, workspace)
