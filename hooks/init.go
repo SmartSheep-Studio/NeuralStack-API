@@ -1,43 +1,70 @@
 package hooks
 
-var AppliedHooks = make(map[string][]Hook)
-
-type Hook struct {
-	ID      string `json:"id"`
-	Scope   string `json:"scope"`
-	Handler any    `json:"-"`
-}
-
-const (
-	HookScopeProvider = "provider"
-	HookScopeServer   = "server"
-	HookScopeWebUI    = "webui"
+import (
+	"errors"
+	"reflect"
+	"sync"
 )
 
-func AddHook(scope string, id string, handler any) {
-	if AppliedHooks[id] == nil {
-		AppliedHooks[id] = []Hook{{id, scope, handler}}
-	} else {
-		AppliedHooks[id] = append(AppliedHooks[id], Hook{id, scope, handler})
+type Hook interface {
+	Subscribe(id string, handler any) error
+	Dispatch(id string, args ...any)
+}
+
+type AsyncHook struct {
+	handlers map[string][]reflect.Value
+	lock     sync.Mutex
+}
+
+func NewAsyncHook() *AsyncHook {
+	return &AsyncHook{
+		handlers: map[string][]reflect.Value{},
+		lock:     sync.Mutex{},
 	}
 }
 
-func AddHooks(scope string, id string, handlers ...any) {
-	if AppliedHooks[id] == nil {
-		AppliedHooks[id] = []Hook{}
+func (h *AsyncHook) Subscribe(id string, handler any) error {
+	h.lock.Lock()
+	defer h.lock.Unlock()
+
+	v := reflect.ValueOf(handler)
+	if v.Type().Kind() != reflect.Func {
+		return errors.New("handler must be a function")
+	}
+
+	handler, ok := h.handlers[id]
+	if !ok {
+		h.handlers[id] = []reflect.Value{}
+	}
+	h.handlers[id] = append(h.handlers[id], v)
+
+	return nil
+}
+
+func (h *AsyncHook) Dispatch(id string, args ...any) {
+	handlers, ok := h.handlers[id]
+	if !ok {
+		// If handler list is empty, skip dispatch
+		return
+	}
+
+	params := make([]reflect.Value, len(args))
+	for i, arg := range args {
+		params[i] = reflect.ValueOf(arg)
 	}
 
 	for _, handler := range handlers {
-		AppliedHooks[id] = append(AppliedHooks[id], Hook{id, scope, handler})
+		go handler.Call(params)
 	}
 }
 
-func GetHookHandlers[HandlerT any](scope string, id string) []HandlerT {
-	var handlers []HandlerT
-	for _, handler := range AppliedHooks[id] {
-		if handler.Scope == scope {
-			handlers = append(handlers, handler.Handler.(HandlerT))
-		}
+func (h *AsyncHook) ListAllEvents() []string {
+	keys := make([]string, len(h.handlers))
+	index := 0
+	for k := range h.handlers {
+		keys[index] = k
+		index++
 	}
-	return handlers
+
+	return keys
 }
