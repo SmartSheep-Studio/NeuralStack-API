@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://repo.smartsheep.studio/smartsheep/neuralstack-api/raw/branch/master/manifest.schema.json",
   "title": "NeuralStack Plugin Manifest",
-  "description": "NeuralStack Plugin Manifest to help loader know what do the plugin do.",
+  "description": "NeuralStack Plugin Manifest to help loader know what do the plugin do",
   "type": "object",
   "properties": {
     "name": {
@@ -38,6 +38,27 @@
       "items": {
         "type": "string"
       }
+    },
+    "installer": {
+      "description": "The installer scripts of the plugin",
+      "type": "object",
+      "properties": {
+        "scripts": {
+          "description": "The script list to let installer execute",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "output": {
+          "description": "The .plug.so file after build result path",
+          "type": "string"
+        }
+      },
+      "required": [
+        "scripts",
+        "output"
+      ]
     }
   },
   "required": [
@@ -47,6 +68,7 @@
     "repository",
     "description",
     "authors",
-    "dependencies"
+    "dependencies",
+    "installer"
   ]
 }

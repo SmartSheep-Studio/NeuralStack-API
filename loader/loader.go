@@ -6,12 +6,12 @@ import (
 	"github.com/gin-gonic/gin"
 	"golang.org/x/exp/maps"
 	"plugin"
-	plugins "repo.smartsheep.studio/smartsheep/neuralstack-api"
+	api "repo.smartsheep.studio/smartsheep/neuralstack-api"
 	"repo.smartsheep.studio/smartsheep/neuralstack-api/datasource"
 	"repo.smartsheep.studio/smartsheep/neuralstack-api/web-injection"
 )
 
-var Plugins []*plugins.Plugin
+var Plugins []*api.Plugin
 
 func LoadPlugin(dst string, router *gin.Engine) error {
 	plug, err := plugin.Open(dst)
@@ -20,11 +20,11 @@ func LoadPlugin(dst string, router *gin.Engine) error {
 	}
 
 	// Lookup instance
-	var instance *plugins.Plugin
+	var instance *api.Plugin
 	if lookup, err := plug.Lookup("P"); err != nil {
 		return fmt.Errorf("error when loading plugin %s: missing instance %w", dst, err)
 	} else {
-		instance = lookup.(*plugins.Plugin)
+		instance = lookup.(*api.Plugin)
 	}
 
 	// Run init function
