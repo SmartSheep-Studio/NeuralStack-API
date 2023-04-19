@@ -1,12 +1,14 @@
 package loader
 
 import (
+	"time"
+
 	"github.com/charmbracelet/log"
 	"github.com/gin-gonic/gin"
 	"github.com/spf13/viper"
-	"time"
 
 	_ "repo.smartsheep.studio/smartsheep/neuralstack-api/configs"
+	"repo.smartsheep.studio/smartsheep/neuralstack-api/filesystem"
 )
 
 func AutomaticSetup(router *gin.Engine) {
@@ -16,7 +18,7 @@ func AutomaticSetup(router *gin.Engine) {
 	}
 
 	start := time.Now()
-	if plugins, err := ScanFolder("plugins"); err != nil {
+	if plugins, err := ScanFolder(filesystem.GetPlugins()); err != nil {
 		log.Fatalf("Error when scanning plugins: %w", err)
 	} else {
 		for _, plug := range plugins {
