@@ -14,18 +14,17 @@ const (
 type UserSession struct {
 	Model
 
-	IpAddress  string     `json:"ip"`
-	Location   string     `json:"location"`
-	Available  bool       `json:"available"`
-	Type       int        `json:"type"`
-	Code       string     `json:"code" gorm:"type:varchar(512)"`
-	Access     string     `json:"access" gorm:"type:varchar(512)"`
-	Refresh    string     `json:"refresh" gorm:"type:varchar(512)"`
-	Scope      string     `json:"scope" gorm:"type:varchar(512)"`
-	ExpiredAt  *time.Time `json:"expired_at"`
-	IdentityID *uint      `json:"identity_id"`
-	ClientID   *uint      `json:"client_id"`
-	UserID     uint       `json:"user_id"`
+	IpAddress string     `json:"ip"`
+	Location  string     `json:"location"`
+	Available bool       `json:"available"`
+	Type      int        `json:"type"`
+	Code      string     `json:"code" gorm:"type:varchar(512)"`
+	Access    string     `json:"access" gorm:"type:varchar(512)"`
+	Refresh   string     `json:"refresh" gorm:"type:varchar(512)"`
+	Scope     string     `json:"scope" gorm:"type:varchar(512)"`
+	ExpiredAt *time.Time `json:"expired_at"`
+	ClientID  *uint      `json:"client_id"`
+	UserID    uint       `json:"user_id"`
 }
 
 const (
@@ -37,7 +36,7 @@ type UserClaims struct {
 	jwt.RegisteredClaims
 
 	Type            string `json:"typ"`
-	SessionID       *uint  `json:"sid"`
-	ClientID        *uint  `json:"cid"`
-	PersonalTokenID *uint  `json:"tid"`
+	SessionID       *uint  `json:"session_id"`
+	ClientID        *uint  `json:"client_id"`
+	PersonalTokenID *uint  `json:"token_id"`
 }

@@ -80,17 +80,6 @@ func UseAuthorization(c *gin.Context, abort bool) {
 			return
 		}
 		c.Set("user-session", session)
-
-		if session.IdentityID != nil {
-			var identity models.OauthIdentity
-			if datasource.C.Where("id = ?", *session.IdentityID).First(&identity).Error != nil {
-				if abort {
-					c.AbortWithStatus(http.StatusUnauthorized)
-				}
-				return
-			}
-			c.Set("user-identity", identity)
-		}
 	}
 
 	var user models.User

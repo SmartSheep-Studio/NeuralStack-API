@@ -21,7 +21,6 @@ func init() {
 			&models.Punish{},
 			&models.OneTimePasscode{},
 			&models.OauthClient{},
-			&models.OauthIdentity{},
 		),
 	)
 }
